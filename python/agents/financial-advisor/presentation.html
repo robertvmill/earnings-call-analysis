@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             overflow: hidden;
         }
 
@@ -23,21 +23,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .slide {
-            width: 90vw;
-            max-width: 1200px;
-            height: calc(90vw * 9 / 16);
-            max-height: 675px;
+            width: 95vw;
+            max-width: 1400px;
+            height: calc(95vw * 9 / 16);
+            max-height: calc(95vh - 40px);
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            padding: 60px;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            padding: 50px 60px;
             display: none;
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            border-top: 6px solid #00A651;
         }
 
         .slide.active {
@@ -51,47 +53,67 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: #00A651;
         }
 
         h1 {
-            font-size: 3.5rem;
-            color: #2d3748;
-            margin-bottom: 30px;
+            font-size: 5.3rem;
+            color: #1a1a1a;
+            margin-bottom: 40px;
             text-align: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 300;
+            letter-spacing: -1px;
         }
 
         h2 {
-            font-size: 2.5rem;
-            color: #2d3748;
-            margin-bottom: 30px;
-            text-align: center;
+            font-size: 3.9rem;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+            text-align: left;
+            font-weight: 300;
+            border-bottom: 3px solid #00A651;
+            padding-bottom: 15px;
         }
 
         h3 {
-            font-size: 1.8rem;
-            color: #4a5568;
+            font-size: 2.5rem;
+            color: #333;
             margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        h4 {
+            font-size: 2.0rem;
+            color: #00A651;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         p, li {
-            font-size: 1.3rem;
+            font-size: 1.7rem;
             line-height: 1.6;
-            color: #4a5568;
-            margin-bottom: 15px;
+            color: #4a4a4a;
+            margin-bottom: 12px;
         }
 
         ul {
-            padding-left: 30px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
         }
 
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            height: 100%;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 40px;
             height: 100%;
         }
@@ -99,46 +121,134 @@
         .tech-stack {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .tech-item {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            padding: 20px;
-            border-radius: 12px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
             text-align: center;
-            border: 2px solid #e2e8f0;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #00A651;
+            position: relative;
+        }
+
+        .tech-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            object-fit: contain;
         }
 
         .tech-item h4 {
-            color: #667eea;
-            font-size: 1.2rem;
+            color: #00A651;
+            font-size: 1.8rem;
             margin-bottom: 10px;
-        }
-
-        .architecture-diagram {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            border: 2px solid #e2e8f0;
-        }
-
-        .flow-item {
-            background: #667eea;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 25px;
-            margin: 10px;
-            display: inline-block;
             font-weight: 600;
         }
 
+        .tech-item p {
+            font-size: 1.4rem;
+            color: #666;
+        }
+
+        .architecture-diagram {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 35px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #00A651;
+        }
+
+        .architecture-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .orchestration-layer {
+            background: #00A651;
+            color: white;
+            padding: 18px 35px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .agents-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flow-item {
+            background: #00A651;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            margin: 10px;
+            display: inline-block;
+            font-weight: 500;
+            font-size: 1.4rem;
+        }
+
         .arrow {
-            font-size: 2rem;
-            color: #667eea;
-            margin: 0 10px;
+            font-size: 1.4rem;
+            color: #00A651;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .vertical-arrow {
+            font-size: 1.4rem;
+            color: #00A651;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .code-snippet {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid #00A651;
+        }
+
+        .problem-solution-pair {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            gap: 25px;
+        }
+
+        .problem-box {
+            background: #fff5f5;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #e53e3e;
+            flex: 1;
+            border: 1px solid #fed7d7;
+        }
+
+        .solution-box {
+            background: #f0fff4;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #00A651;
+            flex: 1;
+            border: 1px solid #c6f6d5;
         }
 
         .navigation {
@@ -152,105 +262,190 @@
         }
 
         .nav-btn {
-            background: rgba(255,255,255,0.9);
-            border: none;
-            padding: 15px 25px;
-            border-radius: 25px;
+            background: white;
+            border: 2px solid #00A651;
+            padding: 12px 25px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #667eea;
+            color: #00A651;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,166,81,0.15);
         }
 
         .nav-btn:hover {
-            background: white;
+            background: #00A651;
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 20px rgba(0,166,81,0.25);
         }
 
         .slide-counter {
             position: fixed;
             top: 30px;
             right: 30px;
-            background: rgba(255,255,255,0.9);
+            background: white;
+            border: 2px solid #00A651;
             padding: 10px 20px;
-            border-radius: 20px;
+            border-radius: 6px;
             font-weight: 600;
-            color: #667eea;
+            color: #00A651;
+            box-shadow: 0 4px 12px rgba(0,166,81,0.15);
+            font-size: 1.4rem;
         }
 
         .highlight {
-            background: linear-gradient(135deg, #667eea20, #764ba220);
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
             padding: 25px;
-            border-radius: 12px;
-            border-left: 5px solid #667eea;
-            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #00A651;
+            margin: 25px 0;
+            border: 1px solid #c6f6d5;
         }
 
         .metrics {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 25px;
             margin-top: 30px;
         }
 
         .metric {
             text-align: center;
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            padding: 20px;
-            border-radius: 12px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #00A651;
         }
 
         .metric-number {
-            font-size: 2.5rem;
+            font-size: 3.9rem;
             font-weight: bold;
-            color: #667eea;
+            color: #00A651;
         }
 
         .metric-label {
-            font-size: 1rem;
-            color: #4a5568;
-            margin-top: 5px;
+            font-size: 1.4rem;
+            color: #666;
+            margin-top: 8px;
+            font-weight: 500;
         }
 
         .demo-section {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            border-radius: 12px;
-            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 35px;
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #00A651;
         }
 
         .demo-link {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #00A651;
             color: white;
             padding: 15px 30px;
-            border-radius: 25px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             margin: 10px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            border: 2px solid #00A651;
+            font-size: 1.4rem;
         }
 
         .demo-link:hover {
+            background: white;
+            color: #00A651;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,166,81,0.25);
+        }
+
+        .compact-section {
+            margin: 20px 0;
+        }
+
+        .compact-section h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #00A651;
+            font-weight: 600;
+        }
+
+        .compact-section ul {
+            margin-bottom: 20px;
+        }
+
+        .compact-section li {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            font-size: 6.3rem;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .title-slide .subtitle {
+            font-size: 2.5rem;
+            color: #00A651;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .title-slide .description {
+            font-size: 2.0rem;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .title-slide .presenter {
+            font-size: 1.7rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .title-slide .event {
+            font-size: 1.4rem;
+            color: #999;
+        }
+
+        .bcg-green {
+            color: #00A651;
+        }
+
+        .section-header {
+            background: #00A651;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.7rem;
+            margin-bottom: 25px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="presentation">
         <!-- Slide 1: Title -->
-        <div class="slide active">
+        <div class="slide active title-slide">
             <h1>Financial Advisor AI</h1>
-            <div style="text-align: center; margin-top: 40px;">
-                <p style="font-size: 1.8rem; color: #667eea; margin-bottom: 30px;">Multi-Agent AI System for Investment Strategy & Analysis</p>
-                <p style="font-size: 1.4rem;">Built with Google's ADK (Agent Development Kit)</p>
-                <p style="font-size: 1.2rem; margin-top: 40px; color: #718096;">Presented by: [Your Name]</p>
-                <p style="font-size: 1rem; color: #a0aec0;">Tech Founders Meetup • 2025</p>
-            </div>
+            <div class="subtitle">Multi-Agent AI System for Investment Strategy & Analysis</div>
+            <div class="description">Built with Google's ADK (Agent Development Kit)</div>
+            <div class="presenter">Presented by: Berto Mill</div>
+            <div class="event">Tech Founders Meetup • 2025</div>
         </div>
 
         <!-- Slide 2: The Problem -->
@@ -258,16 +453,23 @@
             <h2>The Problem We're Solving</h2>
             <div class="two-column">
                 <div>
-                    <h3>💰 Financial Advisory Gaps</h3>
+                    <div class="section-header">💰 Financial Advisory Gaps</div>
                     <ul>
                         <li>Professional financial advice is expensive ($200-500/hour)</li>
                         <li>Robo-advisors lack personalization and context</li>
                         <li>Market analysis is fragmented across platforms</li>
                         <li>Complex investment strategies need expert interpretation</li>
                     </ul>
+                    <h3 style="margin-top: 30px; color: #00A651;">👥 Who's Affected?</h3>
+                    <ul>
+                        <li><strong>Individual investors</strong> - Can't afford professional advice</li>
+                        <li><strong>Small businesses</strong> - Need corporate finance guidance</li>
+                        <li><strong>Young professionals</strong> - Starting their investment journey</li>
+                        <li><strong>Small advisory firms</strong> - Limited by human capacity</li>
+                    </ul>
                 </div>
                 <div>
-                    <h3>🎯 Our Solution</h3>
+                    <div class="section-header">🎯 Our Solution</div>
                     <ul>
                         <li>AI-powered financial advisor accessible 24/7</li>
                         <li>Multi-agent system with specialized expertise</li>
@@ -277,7 +479,7 @@
                 </div>
             </div>
             <div class="highlight">
-                <strong>Market Opportunity:</strong> $4.2T global wealth management market with growing demand for digital solutions
+                <strong>Market Opportunity:</strong> $4.2T global wealth management market with 85% of investors underserved by traditional advisory services
             </div>
         </div>
 
@@ -286,19 +488,23 @@
             <h2>What We Built</h2>
             <div class="architecture-diagram">
                 <h3 style="margin-bottom: 30px;">Multi-Agent Financial Advisory System</h3>
-                <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
-                    <div class="flow-item">Data Analyst Agent</div>
-                    <span class="arrow">→</span>
-                    <div class="flow-item">Trading Analyst Agent</div>
-                    <span class="arrow">→</span>
-                    <div class="flow-item">Execution Analyst Agent</div>
-                    <span class="arrow">→</span>
-                    <div class="flow-item">Risk Analyst Agent</div>
+                <div class="architecture-visual">
+                    <div class="orchestration-layer">🎯 Financial Coordinator (Orchestration Layer)</div>
+                    <div class="vertical-arrow">↓</div>
+                    <div class="agents-row">
+                        <div class="flow-item">📊 Data Analyst Agent</div>
+                        <span class="arrow">→</span>
+                        <div class="flow-item">📈 Trading Analyst Agent</div>
+                        <span class="arrow">→</span>
+                        <div class="flow-item">⚡ Execution Analyst Agent</div>
+                        <span class="arrow">→</span>
+                        <div class="flow-item">🛡️ Risk Analyst Agent</div>
+                    </div>
                 </div>
             </div>
             <div class="metrics">
                 <div class="metric">
-                    <div class="metric-number">4</div>
+                    <div class="metric-number">5</div>
                     <div class="metric-label">Specialized AI Agents</div>
                 </div>
                 <div class="metric">
@@ -315,26 +521,53 @@
         <!-- Slide 4: Technical Architecture -->
         <div class="slide">
             <h2>Technical Architecture</h2>
-            <div class="tech-stack">
-                <div class="tech-item">
-                    <h4>🤖 AI Framework</h4>
-                    <p>Google ADK (Agent Development Kit)<br>Gemini 2.5 Pro Preview</p>
+            <div style="display: flex; flex-direction: column; gap: 30px;">
+                <div style="text-align: center;">
+                    <h3 style="color: #00A651;">System Architecture Overview</h3>
+                    <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin: 25px 0; border: 1px solid #e9ecef;">
+                        <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
+                            <div style="text-align: center; margin: 15px;">
+                                <img src="frontend-architecture.png" alt="Frontend" style="width: 80px; height: 80px; margin-bottom: 10px; background: #f0fff4; border-radius: 8px;">
+                                <div style="font-weight: bold;">Next.js Frontend</div>
+                                <div style="font-size: 0.63rem; color: #666;">Streaming UI</div>
+                            </div>
+                            <span style="font-size: 1.4rem; color: #00A651;">⟷</span>
+                            <div style="text-align: center; margin: 15px;">
+                                <img src="google-adk-logo.png" alt="Multi-Agent System" style="width: 80px; height: 80px; margin-bottom: 10px; background: #4c51bf; border-radius: 8px;">
+                                <div style="font-weight: bold;">Multi-Agent AI</div>
+                                <div style="font-size: 0.63rem; color: #666;">Google ADK</div>
+                            </div>
+                            <span style="font-size: 1.4rem; color: #00A651;">⟷</span>
+                            <div style="text-align: center; margin: 15px;">
+                                <img src="gcp-backend.png" alt="GCP Backend" style="width: 80px; height: 80px; margin-bottom: 10px; background: #38a169; border-radius: 8px;">
+                                <div style="font-weight: bold;">Google Cloud</div>
+                                <div style="font-size: 0.63rem; color: #666;">Vertex AI</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="tech-item">
-                    <h4>🎨 Frontend</h4>
-                    <p>Next.js 15<br>TypeScript, Tailwind CSS</p>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <img src="nextjs-logo.png" alt="Next.js Logo">
+                        <h4>🎨 Frontend</h4>
+                        <p>Next.js 15, TypeScript<br>Tailwind CSS, Streaming UI</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="google-adk-logo.png" alt="Google ADK Logo">
+                        <h4>🤖 AI Framework</h4>
+                        <p>Google ADK, Gemini 2.5 Pro<br>Multi-Agent Orchestration</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="fastapi-logo.png" alt="FastAPI Logo">
+                        <h4>⚡ API Layer</h4>
+                        <p>FastAPI, Python<br>Session Management</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="cloud-deployment.png" alt="Cloud Deployment">
+                        <h4>☁️ Cloud Infrastructure</h4>
+                        <p>Vercel + Google Cloud Run<br>Auto-scaling, Global CDN</p>
+                    </div>
                 </div>
-                <div class="tech-item">
-                    <h4>⚡ Backend</h4>
-                    <p>FastAPI (Python)<br>Streaming & Non-streaming APIs</p>
-                </div>
-                <div class="tech-item">
-                    <h4>☁️ Deployment</h4>
-                    <p>Vercel (Frontend)<br>Google Cloud Run (Backend)</p>
-                </div>
-            </div>
-            <div class="highlight">
-                <strong>Key Innovation:</strong> Multi-agent orchestration with specialized financial expertise and real-time market data integration
             </div>
         </div>
 
@@ -343,26 +576,52 @@
             <h2>How the Multi-Agent System Works</h2>
             <div class="two-column">
                 <div>
-                    <h3>📊 Data Analyst Agent</h3>
+                    <h3 style="color: #00A651;">📊 Data Analyst Agent</h3>
                     <p>• Gathers real-time market data</p>
                     <p>• Analyzes SEC filings and news</p>
                     <p>• Provides comprehensive market overview</p>
+                    <div class="code-snippet">
+data_analyst_agent = Agent(
+    model="gemini-2.5-pro-preview",
+    name="data_analyst_agent",
+    tools=[google_search],
+    output_key="market_data_analysis_output"
+)
+                    </div>
                     
-                    <h3 style="margin-top: 30px;">📈 Trading Analyst Agent</h3>
+                    <h3 style="margin-top: 20px; color: #00A651;">📈 Trading Analyst Agent</h3>
                     <p>• Develops investment strategies</p>
                     <p>• Considers risk tolerance & timeline</p>
-                    <p>• Suggests portfolio allocations</p>
+                    <div class="code-snippet">
+trading_analyst_agent = Agent(
+    model="gemini-2.5-pro-preview",
+    instruction=TRADING_ANALYST_PROMPT,
+    output_key="proposed_trading_strategies_output"
+)
+                    </div>
                 </div>
                 <div>
-                    <h3>⚡ Execution Analyst Agent</h3>
+                    <h3 style="color: #00A651;">⚡ Execution Analyst Agent</h3>
                     <p>• Creates detailed execution plans</p>
                     <p>• Optimizes for cost and timing</p>
-                    <p>• Considers market conditions</p>
+                    <div class="code-snippet">
+execution_analyst_agent = Agent(
+    model="gemini-2.5-pro-preview",
+    instruction=EXECUTION_ANALYST_PROMPT,
+    output_key="execution_plan_output"
+)
+                    </div>
                     
-                    <h3 style="margin-top: 30px;">🛡️ Risk Analyst Agent</h3>
+                    <h3 style="margin-top: 20px; color: #00A651;">🛡️ Risk Analyst Agent</h3>
                     <p>• Evaluates overall portfolio risk</p>
                     <p>• Provides final recommendations</p>
-                    <p>• Ensures alignment with goals</p>
+                    <div class="code-snippet">
+risk_analyst_agent = Agent(
+    model="gemini-2.5-pro-preview",
+    instruction=RISK_ANALYST_PROMPT,
+    output_key="final_risk_assessment_output"
+)
+                    </div>
                 </div>
             </div>
         </div>
@@ -370,24 +629,53 @@
         <!-- Slide 6: Technical Challenges & Solutions -->
         <div class="slide">
             <h2>Technical Challenges & Solutions</h2>
-            <div class="two-column">
-                <div>
-                    <h3>🔧 Challenges</h3>
-                    <ul>
-                        <li><strong>Real-time data integration</strong><br>SEC filings, market data, news</li>
-                        <li><strong>Agent coordination</strong><br>Managing state between agents</li>
-                        <li><strong>Streaming responses</strong><br>Real-time user experience</li>
-                        <li><strong>Production deployment</strong><br>Environment configuration</li>
-                    </ul>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="problem-solution-pair">
+                    <div class="problem-box">
+                        <h4 style="color: #e53e3e;">🔧 Real-time Data Integration</h4>
+                        <p>SEC filings, market data, news sources scattered across different APIs and formats</p>
+                    </div>
+                    <span class="arrow">→</span>
+                    <div class="solution-box">
+                        <h4>✅ Google Search API Integration</h4>
+                        <p>Unified data gathering with automated financial information extraction and parsing</p>
+                    </div>
                 </div>
-                <div>
-                    <h3>✅ Solutions</h3>
-                    <ul>
-                        <li><strong>Google Search API</strong><br>Automated financial data gathering</li>
-                        <li><strong>ADK State Management</strong><br>Output keys for agent communication</li>
-                        <li><strong>Server-Sent Events</strong><br>Streaming API with fallback</li>
-                        <li><strong>Environment Variables</strong><br>Configurable endpoints for dev/prod</li>
-                    </ul>
+                
+                <div class="problem-solution-pair">
+                    <div class="problem-box">
+                        <h4 style="color: #e53e3e;">🔧 Agent State Coordination</h4>
+                        <p>Managing complex state between multiple AI agents and ensuring data consistency</p>
+                    </div>
+                    <span class="arrow">→</span>
+                    <div class="solution-box">
+                        <h4>✅ ADK State Management</h4>
+                        <p>Output keys system for seamless agent communication and data flow orchestration</p>
+                    </div>
+                </div>
+                
+                <div class="problem-solution-pair">
+                    <div class="problem-box">
+                        <h4 style="color: #e53e3e;">🔧 Real-time User Experience</h4>
+                        <p>Users expect immediate feedback, but AI processing can take several seconds</p>
+                    </div>
+                    <span class="arrow">→</span>
+                    <div class="solution-box">
+                        <h4>✅ Streaming API + Fallback</h4>
+                        <p>Server-Sent Events for token-by-token streaming with graceful fallback to batch responses</p>
+                    </div>
+                </div>
+                
+                <div class="problem-solution-pair">
+                    <div class="problem-box">
+                        <h4 style="color: #e53e3e;">🔧 Production Deployment</h4>
+                        <p>Frontend hardcoded to localhost, CORS issues, environment configuration complexity</p>
+                    </div>
+                    <span class="arrow">→</span>
+                    <div class="solution-box">
+                        <h4>✅ Environment Variables + CORS Proxy</h4>
+                        <p>Configurable endpoints for dev/prod with FastAPI proxy handling CORS and session management</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -396,21 +684,21 @@
         <div class="slide">
             <h2>Live Demo</h2>
             <div class="demo-section">
-                <h3 style="margin-bottom: 20px;">Experience the Financial Advisor AI</h3>
+                <h3 style="margin-bottom: 20px; color: #00A651;">Experience the Financial Advisor AI</h3>
                 <p style="margin-bottom: 30px;">Try asking: "I want to invest in AAPL with moderate risk tolerance for long-term growth"</p>
                 
                 <div>
                     <a href="https://earnings-call-analysis.vercel.app" target="_blank" class="demo-link">
                         🚀 Live Application
                     </a>
-                    <a href="https://github.com/google/adk-samples/tree/main/python/agents/financial-advisor" target="_blank" class="demo-link">
+                    <a href="https://github.com/robertvmill/earnings-call-analysis" target="_blank" class="demo-link">
                         📁 Source Code
                     </a>
                 </div>
             </div>
             
             <div class="highlight">
-                <strong>Demo Flow:</strong> User asks about a stock → Data analysis → Strategy development → Execution planning → Risk assessment → Comprehensive recommendation
+                <strong>Demo Flow:</strong> User asks about a stock → Data Analyst gathers market data → Trading Analyst develops strategies → Execution Analyst creates implementation plan → Risk Analyst provides final assessment → Comprehensive recommendation delivered
             </div>
         </div>
 
@@ -419,37 +707,45 @@
             <h2>Business Impact & Future Roadmap</h2>
             <div class="two-column">
                 <div>
-                    <h3>💼 Business Impact</h3>
-                    <ul>
-                        <li>Democratizes financial advisory services</li>
-                        <li>Reduces cost from $300/hour to $30/month</li>
-                        <li>24/7 availability vs scheduled appointments</li>
-                        <li>Consistent, data-driven recommendations</li>
-                    </ul>
+                    <div class="compact-section">
+                        <h3>💼 Business Impact</h3>
+                        <ul>
+                            <li>Democratizes financial advisory services</li>
+                            <li>Reduces cost from $300/hour to $30/month</li>
+                            <li>24/7 availability vs scheduled appointments</li>
+                            <li>Consistent, data-driven recommendations</li>
+                        </ul>
+                    </div>
                     
-                    <h3 style="margin-top: 30px;">🎯 Target Markets</h3>
-                    <ul>
-                        <li>Individual investors (DIY)</li>
-                        <li>Small financial advisory firms</li>
-                        <li>Fintech companies</li>
-                        <li>Corporate finance teams</li>
-                    </ul>
+                    <div class="compact-section">
+                        <h3>🎯 Target Markets</h3>
+                        <ul>
+                            <li>Individual investors (DIY)</li>
+                            <li>Small financial advisory firms</li>
+                            <li>Fintech companies</li>
+                            <li>Corporate finance teams</li>
+                        </ul>
+                    </div>
                 </div>
                 <div>
-                    <h3>🚀 Future Roadmap</h3>
-                    <ul>
-                        <li><strong>Portfolio Management</strong><br>Automated rebalancing & tracking</li>
-                        <li><strong>Regulatory Compliance</strong><br>SEC compliance and reporting</li>
-                        <li><strong>Broker Integration</strong><br>Direct trade execution</li>
-                        <li><strong>Advanced Analytics</strong><br>Backtesting and performance metrics</li>
-                    </ul>
+                    <div class="compact-section">
+                        <h3>🚀 Future Roadmap</h3>
+                        <ul>
+                            <li><strong>Portfolio Management:</strong> Automated rebalancing & tracking</li>
+                            <li><strong>Regulatory Compliance:</strong> SEC compliance and reporting</li>
+                            <li><strong>Broker Integration:</strong> Direct trade execution</li>
+                            <li><strong>Advanced Analytics:</strong> Backtesting and performance metrics</li>
+                        </ul>
+                    </div>
                     
-                    <h3 style="margin-top: 30px;">💰 Monetization</h3>
-                    <ul>
-                        <li>SaaS subscription model</li>
-                        <li>API licensing to fintech</li>
-                        <li>White-label solutions</li>
-                    </ul>
+                    <div class="compact-section">
+                        <h3>💰 Monetization</h3>
+                        <ul>
+                            <li>SaaS subscription model ($30-100/month)</li>
+                            <li>API licensing to fintech companies</li>
+                            <li>White-label solutions for advisory firms</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -458,36 +754,40 @@
         <div class="slide">
             <h2>Why This Matters for Tech Founders</h2>
             <div class="highlight">
-                <h3 style="color: #667eea; margin-bottom: 20px;">🎯 Key Takeaways</h3>
+                <h3 style="color: #00A651; margin-bottom: 20px;">🎯 Key Takeaways from Financial Advisor AI</h3>
                 <div class="two-column">
                     <div>
                         <h4>Technical Innovation</h4>
                         <ul>
-                            <li>Multi-agent AI systems are the future</li>
-                            <li>Google ADK enables rapid AI development</li>
-                            <li>Real-time data + AI = powerful insights</li>
+                            <li><strong>Multi-agent orchestration</strong> solves complex domain problems</li>
+                            <li><strong>Google ADK</strong> enables rapid AI application development</li>
+                            <li><strong>Real-time streaming</strong> creates engaging user experiences</li>
+                            <li><strong>CORS proxy pattern</strong> bridges development and production</li>
                         </ul>
                         
-                        <h4 style="margin-top: 30px;">Market Opportunity</h4>
+                        <h4 style="margin-top: 30px;">Market Validation</h4>
                         <ul>
-                            <li>$4.2T wealth management market</li>
-                            <li>Growing demand for digital solutions</li>
-                            <li>Underserved SMB and individual segments</li>
+                            <li>$4.2T wealth management market opportunity</li>
+                            <li>85% cost reduction vs traditional advisory</li>
+                            <li>Built and deployed in 2 weeks</li>
+                            <li>Immediate user engagement and feedback</li>
                         </ul>
                     </div>
                     <div>
-                        <h4>Technical Learnings</h4>
+                        <h4>Practical Learnings</h4>
                         <ul>
-                            <li>Agent orchestration patterns</li>
-                            <li>Production deployment strategies</li>
-                            <li>API design for AI applications</li>
+                            <li><strong>Environment variables</strong> saved hours of deployment debugging</li>
+                            <li><strong>Streaming fallbacks</strong> ensure reliability in production</li>
+                            <li><strong>Agent specialization</strong> produces better results than monoliths</li>
+                            <li><strong>Financial disclaimers</strong> are critical for compliance</li>
                         </ul>
                         
-                        <h4 style="margin-top: 30px;">Business Model</h4>
+                        <h4 style="margin-top: 30px;">Scalable Business Model</h4>
                         <ul>
-                            <li>SaaS with clear value proposition</li>
-                            <li>Multiple revenue streams</li>
-                            <li>Scalable AI-first architecture</li>
+                            <li>SaaS with clear value proposition and metrics</li>
+                            <li>Multiple revenue streams (B2C, B2B, API)</li>
+                            <li>AI-first architecture scales with compute</li>
+                            <li>Network effects through market data integration</li>
                         </ul>
                     </div>
                 </div>
@@ -495,20 +795,20 @@
         </div>
 
         <!-- Slide 10: Q&A -->
-        <div class="slide">
+        <div class="slide title-slide">
             <h1 style="margin-top: 100px;">Questions & Discussion</h1>
             <div style="text-align: center; margin-top: 60px;">
-                <p style="font-size: 1.5rem; color: #667eea; margin-bottom: 40px;">Let's discuss the technical details, business opportunities, and future of AI in fintech</p>
+                <p style="font-size: 1.05rem; color: #00A651; margin-bottom: 40px;">Let's discuss multi-agent systems, fintech AI applications, and the future of financial advisory</p>
                 
                 <div class="demo-section">
-                    <h3>Connect & Explore</h3>
+                    <h3 style="color: #00A651;">Connect & Explore</h3>
                     <a href="https://earnings-call-analysis.vercel.app" target="_blank" class="demo-link">
                         Try the App
                     </a>
-                    <a href="https://github.com/google/adk-samples" target="_blank" class="demo-link">
+                    <a href="https://github.com/robertvmill/earnings-call-analysis" target="_blank" class="demo-link">
                         View Code
                     </a>
-                    <a href="mailto:[your-email]" class="demo-link">
+                    <a href="https://www.linkedin.com/in/bertomill/" target="_blank" class="demo-link">
                         Get in Touch
                     </a>
                 </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Bot, Send, TrendingUp, User } from "lucide-react";
+import { Bot, Send, TrendingUp, User, Clock, BarChart3 } from "lucide-react";
 
 // Use environment variable or fallback to localhost for development
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
@@ -22,6 +22,7 @@ export default function Home() {
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [streamingEnabled, setStreamingEnabled] = useState(true);
+  const [loadingStartTime, setLoadingStartTime] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -31,6 +32,24 @@ export default function Home() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Loading timer for user feedback
+  const [loadingTimer, setLoadingTimer] = useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isLoading && loadingStartTime) {
+      interval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - loadingStartTime) / 1000);
+        setLoadingTimer(elapsed);
+      }, 1000);
+    } else {
+      setLoadingTimer(0);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isLoading, loadingStartTime]);
 
   const formatText = (text: string) => {
     // Convert various markdown-like formatting to JSX
@@ -105,6 +124,7 @@ export default function Home() {
 
   const handleStreamingSubmit = async (userMessage: string) => {
     setIsLoading(true);
+    setLoadingStartTime(Date.now());
     
     // Add user message
     const newUserMessage: Message = { role: "user", content: userMessage };
@@ -174,6 +194,7 @@ export default function Home() {
 
   const handleNonStreamingSubmit = async (userMessage: string) => {
     setIsLoading(true);
+    setLoadingStartTime(Date.now());
     
     const newUserMessage: Message = { role: "user", content: userMessage };
     setMessages((prev) => [...prev, newUserMessage]);
@@ -217,6 +238,55 @@ export default function Home() {
       await handleNonStreamingSubmit(userMessage);
     }
   };
+
+  // Loading Animation Component
+  const LoadingMessage = () => (
+    <div className="flex items-start space-x-4 justify-start">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+        <Bot className="h-5 w-5" />
+      </div>
+      
+      <div className="group relative max-w-[75%] rounded-2xl px-4 py-3 shadow-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+        <div className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+          <div className="flex items-center space-x-3 mb-2">
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            </div>
+            <span className="text-blue-600 dark:text-blue-400 font-medium">Analyzing your request...</span>
+          </div>
+          
+          <div className="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400">
+            <Clock className="h-3 w-3" />
+            <span>
+              {loadingTimer < 10 
+                ? "Processing..." 
+                : loadingTimer < 30 
+                  ? `Processing... ${loadingTimer}s (typically 30-60s for financial analysis)`
+                  : `Processing... ${loadingTimer}s (complex analysis in progress)`
+              }
+            </span>
+          </div>
+          
+          <div className="mt-2 flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400">
+            <BarChart3 className="h-3 w-3" />
+            <span>Gathering market data, analyzing trends, and generating insights...</span>
+          </div>
+          
+          {/* Progress bar animation */}
+          <div className="mt-3 w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1">
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-1 rounded-full animate-pulse" 
+                 style={{ 
+                   width: `${Math.min(90, (loadingTimer / 60) * 100)}%`,
+                   transition: 'width 1s ease-in-out'
+                 }}>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
@@ -304,6 +374,10 @@ export default function Home() {
               )}
             </div>
           ))}
+          
+          {/* Show loading animation when processing */}
+          {isLoading && <LoadingMessage />}
+          
           <div ref={messagesEndRef} />
         </div>
       </div>
@@ -311,12 +385,28 @@ export default function Home() {
       {/* Input */}
       <div className="border-t border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-900/60">
         <div className="mx-auto max-w-4xl p-6">
+          {/* Loading status bar */}
+          {isLoading && (
+            <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="flex space-x-1">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                </div>
+                <span className="text-sm text-blue-700 dark:text-blue-300 font-medium">
+                  AI is analyzing your request... This may take 30-60 seconds for complex financial analysis.
+                </span>
+              </div>
+            </div>
+          )}
+          
           <form onSubmit={handleSubmit} className="flex items-end space-x-4">
             <div className="flex-1">
               <textarea
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Ask about investments, stocks, portfolio management, or financial planning..."
+                placeholder={isLoading ? "AI is processing your request..." : "Ask about investments, stocks, portfolio management, or financial planning..."}
                 className="w-full resize-none rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50 min-h-[50px] max-h-[150px] shadow-lg"
                 rows={1}
                 disabled={isLoading}
@@ -334,7 +424,14 @@ export default function Home() {
               className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg transition-all hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-lg"
             >
               {isLoading ? (
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                <div className="relative">
+                  <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  {loadingTimer > 10 && (
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs text-white bg-black/50 px-2 py-1 rounded whitespace-nowrap">
+                      {loadingTimer}s
+                    </div>
+                  )}
+                </div>
               ) : (
                 <Send className="h-5 w-5" />
               )}

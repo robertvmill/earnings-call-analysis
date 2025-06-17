@@ -82,15 +82,22 @@ async def api_health():
 if __name__ == "__main__":
     import uvicorn
     
+    # Cloud Run provides PORT environment variable, default to 8000 for local dev
     port = int(os.getenv("PORT", 8000))
     host = os.getenv("HOST", "0.0.0.0")
     
     print(f"Starting Financial Advisor API server on {host}:{port}")
     print("CORS enabled for localhost:3000")
+    print(f"Environment PORT: {os.getenv('PORT', 'not set')}")
     
-    uvicorn.run(
-        "web_server:app",
-        host=host,
-        port=port,
-        reload=False
-    ) 
+    try:
+        uvicorn.run(
+            "web_server:app",
+            host=host,
+            port=port,
+            reload=False,
+            log_level="info"
+        )
+    except Exception as e:
+        print(f"Failed to start server: {e}")
+        raise 
