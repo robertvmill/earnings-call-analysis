@@ -2,17 +2,27 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies (if needed)
-RUN apt-get update && apt-get install -y build-essential
+# Install system dependencies
+RUN apt-get update && apt-get install -y build-essential && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copy your project files
-COPY . /app
+# Install Poetry first
+RUN pip install poetry && poetry config virtualenvs.create false
 
-# Install Poetry and project dependencies
-RUN pip install poetry && poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
+# Copy poetry files first for better caching
+COPY pyproject.toml poetry.lock ./
 
-# Cloud Run will provide the PORT environment variable
-# Don't use EXPOSE as Cloud Run ignores it
+# Install dependencies
+RUN poetry install --no-interaction --no-ansi --only=main
 
-# Start our custom FastAPI web server with CORS support
-CMD ["poetry", "run", "python", "web_server.py"]
+# Copy the rest of the application
+COPY . .
+
+# Make startup script executable
+RUN chmod +x start.sh
+
+# Create a non-root user for security
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
+
+# Use the startup script
+CMD ["./start.sh"]
