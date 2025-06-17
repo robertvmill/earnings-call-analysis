@@ -5,13 +5,27 @@ description = "AI-driven agent designed to facilitate the exploration of the fin
 authors = [{ name = "Antonio Gulli", email = "gulli@google.com" }]
 license = "Apache License 2.0"
 readme = "README.md"
+requires-python = "^3.9"
+dependencies = [
+    "google-cloud-aiplatform[adk,agent-engines]>=1.93.0",
+    "google-genai>=1.9.0",
+    "pydantic>=2.10.6",
+    "python-dotenv>=1.0.1",
+    "google-adk>=1.0.0",
+    "absl-py>=2.3.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.34.0",
+]
+
+[tool.poetry]
+name = "financial-advisor"
+version = "0.1"
+description = "AI-driven agent designed to facilitate the exploration of the financial advisor landscape"
+authors = ["Antonio Gulli <gulli@google.com>"]
 
 [tool.poetry.dependencies]
-google-cloud-aiplatform = { version = "^1.93.0", extras = [
-    "adk",
-    "agent-engines",
-] }
 python = "^3.9"
+google-cloud-aiplatform = { version = "^1.93.0", extras = ["adk", "agent-engines"] }
 google-genai = "^1.9.0"
 pydantic = "^2.10.6"
 python-dotenv = "^1.0.1"
@@ -19,6 +33,7 @@ google-adk = "^1.0.0"
 absl-py = "^2.3.0"
 fastapi = "^0.115.0"
 uvicorn = "^0.34.0"
+
 [tool.poetry.group.dev]
 optional = true
 
